@@ -16,9 +16,9 @@
             CalculateItemDetails();
         }
 
-        public ShoppingCartItem UpdateQuantity(int itemsToAdd)
+        public ShoppingCartItem UpdateQuantity(int newQuantity)
         {
-            Quantity += itemsToAdd;
+            Quantity += newQuantity;
             CalculateItemDetails();
             return this;
         }

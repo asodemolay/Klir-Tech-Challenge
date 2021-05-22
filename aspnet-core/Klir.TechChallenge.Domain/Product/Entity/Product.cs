@@ -9,6 +9,11 @@ namespace Klir.TechChallenge.Domain.Product.Entity
         public decimal Price { get; private set; }
         public IPromotion CurrentPromotion { get; private set; }
 
+        public Product(int id, string name, decimal price): this(name, price)
+        {
+            Id = id;
+        }
+
         internal Product(string name, decimal price)
         {
             Name = name;

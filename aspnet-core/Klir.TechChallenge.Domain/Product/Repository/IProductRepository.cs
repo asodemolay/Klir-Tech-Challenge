@@ -1,15 +1,13 @@
-﻿using Klir.TechChallenge.Web.Api.Domain.Product;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Klir.TechChallenge.Web.Api.Domain.Product.Repository
+namespace Klir.TechChallenge.Domain.Product.Repository
 {
     public interface IProductRepository
     {
         IEnumerable<Entity.Product> GetProducts();
 
-        Entity.Product GetProduct(int id);
+        Entity.Product GetProductById(int id);
+
+        IEnumerable<Entity.Product> GetProductByName(string name);
     }
 }

@@ -1,14 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Klir.TechChallenge.Infra.IoC;
+using Microsoft.OpenApi.Models;
 
 namespace KlirTechChallenge.Web.Api
 {
@@ -36,6 +32,13 @@ namespace KlirTechChallenge.Web.Api
             });
 
             services.AddControllers();
+            services.AddMvc();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Klir Web API", Version = "v1" });
+            });
+
+            RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,8 +47,11 @@ namespace KlirTechChallenge.Web.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Klir Web API v1"));
             }
 
+            app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseCors(AllowSpecificOrigins);
@@ -56,6 +62,11 @@ namespace KlirTechChallenge.Web.Api
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private static void RegisterServices(IServiceCollection services)
+        {
+            DependencyContainer.RegisterServices(services);
         }
     }
 }

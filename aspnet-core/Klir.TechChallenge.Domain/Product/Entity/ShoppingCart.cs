@@ -13,17 +13,44 @@ namespace Klir.TechChallenge.Domain.Product.Entity
             return ShoppingCartItems.Sum(i => i.Total);
         }
 
-        public ShoppingCart AddItem(Product product , short quantity)
+        public ShoppingCart AddItem(Product product, short quantity)
         {
-            if (ShoppingCartItems.Count(p => p.Product.Id == product.Id) == 0)
+            if (ShoppingCartItems.Any(p => p.Product.Id == product.Id) == false)
             {
                 ShoppingCartItems.Add(new ShoppingCartItem(product, quantity));
             }
             else
             {
                 var item = ShoppingCartItems.First(p => p.Product.Id == product.Id);
-                _ = item.UpdateQuantity(quantity);
+                _ = item.UpdateQuantity(item.Quantity + quantity);
             }
+            return this;
+        }
+
+        public ShoppingCart ChangeItemQuantity(Product product, short newQuantity)
+        {
+            if (newQuantity > 0)
+            {
+                var item = ShoppingCartItems.First(p => p.Product.Id == product.Id);
+                _ = item.UpdateQuantity(newQuantity);
+            }
+            else
+            {
+                _ = RemoveItem(product);
+            }
+
+            return this;
+        }
+
+        public ShoppingCart RemoveItem(Product product)
+        {
+            var item = ShoppingCartItems.First(p => p.Product.Id == product.Id);
+
+            if (item != null)
+            {
+                ShoppingCartItems.Remove(item);
+            }
+
             return this;
         }
     }
