@@ -11,5 +11,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infra.Data\" />
+  </ItemGroup>
+
 
 </Project>
