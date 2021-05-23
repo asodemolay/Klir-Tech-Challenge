@@ -31,5 +31,11 @@ namespace Klir.TechChallenge.Domain.Product.Entity
             CurrentPromotion = promotion;
             return this;
         }
+
+        public Product RemovePromotion()
+        {
+            CurrentPromotion = null;
+            return this;
+        }
     }
 }

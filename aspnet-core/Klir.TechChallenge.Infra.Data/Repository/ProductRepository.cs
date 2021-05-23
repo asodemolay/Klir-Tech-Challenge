@@ -1,4 +1,5 @@
 ﻿using Klir.TechChallenge.Domain.Product.Entity;
+using Klir.TechChallenge.Domain.Product.Entity.Promotions;
 using Klir.TechChallenge.Domain.Product.Repository;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,13 @@ namespace Klir.TechChallenge.Infra.Data.Repository
 
         public ProductRepository(Load.IContext context) => _context = context;
 
+        public Product AddPromotionToProduct(int productId, IPromotion promotion)
+        {
+            var product = GetProductById(productId);
+            product.SetPromotion(promotion);
+            return product;
+        }
+
         public Product GetProductById(int id)
         {
             return _context.Products.FirstOrDefault(p => p.Id == id);
@@ -28,6 +36,13 @@ namespace Klir.TechChallenge.Infra.Data.Repository
         public IEnumerable<Product> GetProducts()
         {
             return _context.Products;
+        }
+
+        public Product RemoveProductPromotion(int productId)
+        {
+            var product = GetProductById(productId);
+            product.RemovePromotion();
+            return product;
         }
     }
 }

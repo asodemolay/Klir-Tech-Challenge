@@ -22,6 +22,7 @@ namespace Klir.TechChallenge.Web.Api.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public IActionResult Get(int id)
         {
             var product = _repository.GetProductById(id);
@@ -31,6 +32,7 @@ namespace Klir.TechChallenge.Web.Api.Controllers
 
         [HttpGet("name={name}")]
         [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Get(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) return BadRequest("Parameter 'name' cannot be empty");
@@ -38,6 +40,38 @@ namespace Klir.TechChallenge.Web.Api.Controllers
             var products = _repository.GetProductByName(name);
             if (products == null) return null;
             return Ok(products);
+        }
+
+        [HttpPost("{id}/AddPromotion")]
+        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public IActionResult AddPromotion(int id, [FromBody] Domain.Product.Enum.PromotionType promotionType)
+        {
+            if (id < 1) return BadRequest("Invalid Id");
+            if (ModelState.IsValid == false) return BadRequest(ModelState);
+
+            switch (promotionType)
+            {
+                case Domain.Product.Enum.PromotionType.Buy1Get1:
+                    _repository.AddPromotionToProduct(id, new Domain.Product.Entity.Promotions.Buy1Get1Free());
+                    break;
+                case Domain.Product.Enum.PromotionType.Get3For10Euros:
+                    _repository.AddPromotionToProduct(id, new Domain.Product.Entity.Promotions.Get3For10Euros());
+                    break;
+                default:
+                    return BadRequest($"Promotion Type {promotionType} does not exists.");
+            }
+
+            return Ok(_repository.GetProductById(id));
+        }
+
+        [HttpDelete("{id}/RemovePromotion")]
+        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public IActionResult RemovePromotion(int id)
+        {
+            if (id < 1) return BadRequest("Invalid Id");
+            return Ok(_repository.RemoveProductPromotion(id));
         }
     }
 }

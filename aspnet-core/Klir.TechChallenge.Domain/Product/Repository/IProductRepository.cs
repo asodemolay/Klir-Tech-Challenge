@@ -9,5 +9,9 @@ namespace Klir.TechChallenge.Domain.Product.Repository
         Entity.Product GetProductById(int id);
 
         IEnumerable<Entity.Product> GetProductByName(string name);
+
+        Entity.Product AddPromotionToProduct(int productId, Entity.Promotions.IPromotion promotion);
+
+        Entity.Product RemoveProductPromotion(int productId);
     }
 }
