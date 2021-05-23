@@ -13,7 +13,6 @@ namespace Klir.TechChallenge.Infra.Data.Repository
     {
         private readonly Load.IContext _context;
 
-
         public ProductRepository(Load.IContext context) => _context = context;
 
         public Product AddPromotionToProduct(int productId, IPromotion promotion)

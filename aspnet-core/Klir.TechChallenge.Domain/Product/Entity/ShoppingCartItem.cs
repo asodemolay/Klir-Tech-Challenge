@@ -7,7 +7,12 @@
         public decimal Price => Product.Price;
         public decimal Total { get; private set; }
 
-        public string PromotionApplied { get; private set; }
+        public string PromotionApplied
+        {
+            get { return _isPromotionApplied ? Product.CurrentPromotion.Description : ""; }
+        }
+
+        private bool _isPromotionApplied = false;
 
         public ShoppingCartItem(Product product, int quantity)
         {
@@ -18,7 +23,7 @@
 
         public ShoppingCartItem UpdateQuantity(int newQuantity)
         {
-            Quantity += newQuantity;
+            Quantity = newQuantity;
             CalculateItemDetails();
             return this;
         }
@@ -28,12 +33,13 @@
             if (Product.CurrentPromotion != null)
             {
                 Total = Product.CurrentPromotion.ApplyPromotion(Quantity, Product.Price);
-                PromotionApplied = Product.CurrentPromotion.Description;
             }
             else
             {
                 Total = Quantity * Product.Price;
             }
+
+            _isPromotionApplied = Total != Quantity * Product.Price;
         }
     }
 }

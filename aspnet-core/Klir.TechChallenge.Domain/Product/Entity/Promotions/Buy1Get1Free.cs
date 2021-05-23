@@ -13,7 +13,7 @@ namespace Klir.TechChallenge.Domain.Product.Entity.Promotions
         public decimal ApplyPromotion(int itemsQuantity, decimal productPrice)
         {
             decimal total = itemsQuantity * productPrice;
-            for (int i = 0; i < itemsQuantity; i++)
+            for (int i = 1; i <= itemsQuantity; i++)
             {
                 total -= i % PROMO_ITENS_TO_DISCOUNT == 0 ? productPrice : 0;
             }

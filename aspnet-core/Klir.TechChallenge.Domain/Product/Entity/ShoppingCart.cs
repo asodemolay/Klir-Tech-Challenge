@@ -5,12 +5,16 @@ namespace Klir.TechChallenge.Domain.Product.Entity
 {
     public class ShoppingCart
     {
+        public ShoppingCart()
+        {
+            ShoppingCartItems = new List<ShoppingCartItem>();
+        }
         public IList<ShoppingCartItem> ShoppingCartItems { get; private set; }
         public decimal Total => GetTotal();
 
         private decimal GetTotal()
         {
-            return ShoppingCartItems.Sum(i => i.Total);
+            return ShoppingCartItems.Count > 0 ? ShoppingCartItems.Sum(i => i.Total) : 0;
         }
 
         public ShoppingCart AddItem(Product product, short quantity)

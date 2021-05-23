@@ -10,6 +10,8 @@ namespace Klir.TechChallenge.Infra.IoC
         {
             services.AddSingleton<Data.Load.IContext, Data.Load.Context>();
             services.AddSingleton<IProductRepository, ProductRepository>();
+            services.AddSingleton<IPromotionRepository, PromotionRepository>();
+            services.AddSingleton<IShoppingCartRepository, ShoppingCartRepository>();
         }
     }
 }
