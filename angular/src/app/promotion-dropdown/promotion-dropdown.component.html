@@ -1,0 +1,12 @@
+<select
+  name="cmbPromotions"
+  class="form-select"
+  aria-label="Default select example"
+  (ngModelChange)="SelectChanged($event)"
+  [(ngModel)]="currentPromotion"
+>
+  <option value="-1">No Promotions</option>
+  <ng-container *ngFor="let p of promotions">
+    <option [value]="p.type">{{ p.description }}</option>
+  </ng-container>
+</select>

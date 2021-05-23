@@ -27,7 +27,9 @@ namespace KlirTechChallenge.Web.Api
                 options.AddPolicy(name: AllowSpecificOrigins,
                                   builder =>
                                   {
-                                      builder.WithOrigins("http://localhost:4200");
+                                      builder.WithOrigins("http://localhost:4200")
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader();
                                   });
             });
 
@@ -47,7 +49,7 @@ namespace KlirTechChallenge.Web.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
+                app.UseSwagger(c => c.SerializeAsV2 = true);
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Klir Web API v1"));
             }
 

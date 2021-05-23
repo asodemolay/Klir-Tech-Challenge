@@ -45,10 +45,9 @@ namespace Klir.TechChallenge.Web.Api.Controllers
         [HttpPost("{id}/AddPromotion")]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public IActionResult AddPromotion(int id, [FromBody] Domain.Product.Enum.PromotionType promotionType)
+        public IActionResult AddPromotion(int id, Domain.Product.Enum.PromotionType promotionType)
         {
             if (id < 1) return BadRequest("Invalid Id");
-            if (ModelState.IsValid == false) return BadRequest(ModelState);
 
             switch (promotionType)
             {
