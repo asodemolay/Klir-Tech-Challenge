@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductService, PromotionService } from '../services/services';
 import { IPromotion, Product, PromotionType } from '../services/models';
 

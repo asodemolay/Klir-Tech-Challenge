@@ -13,7 +13,7 @@
     <tr *ngFor="let p of products">
       <th scope="row">{{ p.id }}</th>
       <td>{{ p.name }}</td>
-      <td>{{ p.price }}</td>
+      <td class="text-right">{{ p.price | currency:'EUR' }}</td>
       <td>
         <app-promotion-dropdown
           [promotions]="promotionsLoaded"

@@ -1,0 +1,37 @@
+<h1>Checkout</h1>
+<ng-container *ngIf="shoppingCart">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total</th>      
+        <th scope="col">Promotion</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr app-checkout-item
+        *ngFor="let item of shoppingCart.shoppingCartItems"
+        [item]="item"
+        (updated)="handleUpdatedEvent($event)"
+      ></tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="text-right">{{shoppingCart.total | currency:'EUR'}}</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>  
+</ng-container>
+<p>
+  If you wish <a [routerLink]="['/']">continue buying</a>.
+</p>
+
+

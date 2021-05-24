@@ -59,6 +59,8 @@ namespace Klir.TechChallenge.Web.Api.Controllers
 
             if (product == null) return BadRequest($"There's no Product with Id {productId}");
 
+            if (_repository.GetShoppingCart().ShoppingCartItems.Any(p => p.Product.Id == productId) == false) return Ok(_repository.GetShoppingCart());
+
             return Ok(_repository.RemoveItem(product));
         }
     }
