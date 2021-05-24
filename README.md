@@ -13,7 +13,7 @@ To run the backend portion, you have two options:
 
 #### Running from Visual Studio
 Open the `Klir.TechChallenge.sln` in Visual Studio and click run ▶ the project `Klir.TechChallenge.Web.Api`
->I've created a launch profile called `Background` to run the project in background (with no UI). If you prefer, run the profile `KlirTechChallenge.Web.Api` to access the Swagger UI.
+>I've created a launch profile called `Background` to run the project in background (with no UI) from Visual Studio. If you prefer, run the profile `KlirTechChallenge.Web.Api` to access the Swagger UI.
 
 #### Running from Command Line / Terminal
 Navigate to `aspnet-core/Klir.TechChallenge.Web.Api` and execute the command:
@@ -55,7 +55,7 @@ I used the [ng-swagger-gen](https://www.npmjs.com/package/ng-swagger-gen) to bui
 It was not a request but since the company has [bootstrap](https://getbootstrap.com/) as a desirable skill, I tried to use it as much as possible.
 
 ## About the tests
-Since tests were note *mandatory* but *recommended*, I've opt to focus in developing a function application. I'll develop the tests in a future.
+Since tests were not *mandatory* but *recommended*, I've opt to focus in developing a function application. I'll develop the tests in a future.
 
 
 
